@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" monitorInterval="30">
+
+    <!-- 日志文件常用配置  -->
+    <Properties>
+        <!-- 文件前缀 -->
+        <Property name="APP_NAME">cmh5</Property>
+        <!-- 本地日志路径 -->
+        <Property name="LOG_HOME">./logs/</Property>
+        <!-- 压缩日志路径 -->
+        <Property name="GZ_LOG_HOME">./logs/gz/</Property>
+        <!-- es日志路径 -->
+        <Property name="SH_LOG_HOME">/data/nbgameinfo/</Property>
+        <!-- 统一日志打印格式 -->
+        <Property name="LOG_PATTERN" value="[%d] [%p] [%c{1.}][%L]  [%t] %m %ex%n"/>
+        <!-- JSON输出  只打印内容和换行-->
+        <Property name="JSON_LOG_PATTERN" value="%m %ex%n"/>
+
+    </Properties>
+
+    <Appenders>
+
+
+        <!--基本console日志 begin-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- 基本console日志 end-->
+
+
+
+    </Appenders>
+
+
+    <Loggers>
+
+        <root level="info">
+             <appender-ref ref="Console"/>
+        </root>
+    </Loggers>
+</Configuration>
