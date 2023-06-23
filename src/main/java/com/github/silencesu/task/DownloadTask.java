@@ -103,11 +103,12 @@ public class DownloadTask implements Callable<Boolean> {
     private boolean downMp3(String output, ChapterInfo info) {
         logger.info("任务:{},准备执行下载命令", taskid);
 
+        long downLoadBegin = System.currentTimeMillis();
 
         ProcessBuilder pb;
         //是否配置代理
-        if (Strings.isBlank(Option.proxyAdd)) {
-            pb = new ProcessBuilder("curl", "--proxy", "127.0.0.1:7890", "-o", output, info.getMp3Url());
+        if (!Strings.isBlank(Option.proxyAdd)) {
+            pb = new ProcessBuilder("curl", "--proxy", Option.proxyAdd, "-o", output, info.getMp3Url());
         } else {
             pb = new ProcessBuilder("curl", "-o", output, info.getMp3Url());
         }
@@ -117,7 +118,7 @@ public class DownloadTask implements Callable<Boolean> {
             Process p = pb.start();
             int exitCode = p.waitFor();
             if (exitCode == 0) {
-                logger.info("success downloaded:,File:{} downloaded successfully.", info.getName());
+                logger.info("success downloaded:,File:{} tine:{}", info.getName(), (System.currentTimeMillis() - downLoadBegin));
                 return true;
             } else {
                 logger.info("failed download: file:{}", info.getName());
