@@ -117,7 +117,7 @@ public class DownloadTask implements Callable<Boolean> {
             Process p = pb.start();
             int exitCode = p.waitFor();
             if (exitCode == 0) {
-                logger.info("success downloaded:,File:{} tine:{}", info.getName(), (System.currentTimeMillis() - downLoadBegin));
+                logger.info("success downloaded:,File:{} tims:{}", info.getName(), (System.currentTimeMillis() - downLoadBegin));
                 return true;
             } else {
                 logger.info("failed download: file:{}", info.getName());
