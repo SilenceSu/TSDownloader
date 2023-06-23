@@ -45,7 +45,6 @@ public class DownloadTask implements Callable<Boolean> {
 
             webDriver = ChromeDriverFactory.builder().build().instance();
 
-            Thread.sleep(new Random().nextInt(1000, 5000));
 
 
             /**
