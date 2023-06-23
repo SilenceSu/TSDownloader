@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>ximalaya</artifactId>
+    <groupId>com.github.silencesu</groupId>
+    <artifactId>TSDownloader</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -52,6 +52,18 @@
             <version>2.18.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
+        </dependency>
+
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+            <version>4.7.4</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -59,30 +71,39 @@
     <build>
         <plugins>
 
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.3</version>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+
+                <configuration>
+
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>                         <!-- 添加到classpath 开关 -->
+                            <mainClass>com.github.silencesu.Start</mainClass>
+                            <classpathPrefix>lib/</classpathPrefix>
+
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
                 <executions>
-                    <!-- 打包非core包内容 -->
                     <execution>
-                        <id>copy-dependencies</id>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
                         <phase>package</phase>
-                        <configuration>
-                            <outputDirectory>${project.parent.parent.basedir}/release/libs/</outputDirectory>
-                            <excludeGroupIds>com.sh.dominate</excludeGroupIds>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
-
 
 
         </plugins>
