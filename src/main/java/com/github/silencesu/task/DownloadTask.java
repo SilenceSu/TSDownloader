@@ -57,7 +57,7 @@ public class DownloadTask implements Callable<Boolean> {
 
             webDriver.get(url);
 
-            logger.info("任务：{},已经页面：{}", taskid, url);
+            logger.info("任务：{},打开页面：{}", taskid, url);
 
 
             /**

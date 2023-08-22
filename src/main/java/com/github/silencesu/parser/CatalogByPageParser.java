@@ -1,6 +1,5 @@
 package com.github.silencesu.parser;
 
-import com.github.silencesu.task.DownloadTask;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,9 +42,8 @@ public class CatalogByPageParser {
             String href = ElementByTagA.getAttribute("href");
             String title = ElementByTagA.getAttribute("title");
 
-            int firstIndex = title.indexOf("第")+1;
 
-            String chapterId = title.substring(firstIndex, firstIndex + 4);
+            String chapterId = title.substring(title.indexOf("第")+1,title.indexOf("章"));
 
             try {
                 pageCatalog.put(Integer.parseInt(chapterId), href);
